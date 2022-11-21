@@ -22,12 +22,19 @@ import Flatpickr from "react-flatpickr"
 import ProgressBar from "@ramonak/react-progress-bar"
 
 import Timeline from '@components/timeline'
-const Step3 = ({handleNext}) => {
+const Step3 = ({handleNext, sets_date, sete_date, setbudget, setlocations, setradius}) => {
   const [activeView, setActiveView] = useState('lifetime')
-  const [ddate, setddate] = useState()
-  console.log(ddate)
+  const [location, setlocation] = useState('location')
+  // const [ddate, setddate] = useState()
+  // const [s_date, sets_date] = useState()
+  // const [e_date, sete_date] = useState()
+  // const [budget, setbudget] = useState()
+  // const [locations, setlocations] = useState()
+  // const [radius, setradius] = useState()
+  // console.log(s_date, e_date)
   const [picker, setPicker] = useState(new Date())
-console.log(setddate)
+  console.log(picker, setPicker, 'p')
+  // console.log(budget, locations, radius)
   return (
     <>
   
@@ -74,7 +81,7 @@ Daily                </Button>
                 <label>start date</label>
                 <Flatpickr
                         className="form-control  mb-0 mt-0 border-bottom-n"
-                        onChange={(date) => { setPicker(date) }}
+                        onChange={(date) => { sets_date(date) }}
                         id="default_picker"
                         name="default_picker"
                         defaultValue={picker}
@@ -93,7 +100,7 @@ Daily                </Button>
                 <label>End date</label>
                 <Flatpickr
                         className="form-control  mb-0 mt-0 border-bottom-n"
-                        onChange={(date) => { setPicker(date) }}
+                        onChange={(date) => { sete_date(date) }}
                         id="default_picker"
                         name="default_picker"
                         defaultValue={picker}
@@ -107,14 +114,16 @@ Daily                </Button>
               </div></Col>
               </Row>
               <Row className='mt-2'> 
-                <div className='demo-vertical-spacing'>
 
       <div>
         <span>Enter campaign budget
 </span>
-<ProgressBar completed={60} />
+<Col md= '12'>
+<input type='text' style={{border : '1.5px solid #E9E9E9 ', padding : '1rem'}} placeholder =' budget' onChange={(e) => { setbudget(e.target.value) } }/>
+
+</Col>
+
       </div>
-    </div>
               </Row>
         </div>
       </CardBody>
@@ -132,33 +141,35 @@ Daily                </Button>
                 <Button
                   tag='label'
                   className={classnames('btn-icon view-btn grid-view-btn', {
-                    active: activeView === 'lifetime'
+                    active: location === 'location'
                   })}
                   color='primary'
                   outline
                 //   style={{background : '#0F6EFF'
                 // }}
-                  onClick={() => setActiveView('lifetime')}
+                  onClick={() => setlocation('location')}
                 >
 
 location                </Button>
                 <Button
                   tag='label'
                   className={classnames('btn-icon view-btn list-view-btn', {
-                    active: activeView === 'daily'
+                    active: location === 'radius'
                   })}
                   color='primary'
                   outline
-                  onClick={() => setActiveView('daily')}
+                  onClick={() => setlocation('radius')}
                 >
 Radius                </Button>
               </ButtonGroup>
               <Row className='mt-2'>
+{location === 'location' ?              <input type='text' placeholder='Select a place name, address or coordinates' style={{border : '1.5px solid #E9E9E9 ', padding : '1rem'}} onChange = {(e) => { setlocations(e.target.value) } }/>
+: <input type='text' style={{border : '1.5px solid #E9E9E9 ', padding : '1rem'}} placeholder =' radius' onChange = {(e) => { setradius(e.target.value) } }/>
 
-             <input type='text' placeholder='Select a place name, address or coordinates' style={{border : '1.5px solid #E9E9E9 ', padding : '1rem'}}/>
+}
 
               </Row>
-              <Row className='mt-2'> 
+              {/* <Row className='mt-2'> 
                 <div className='demo-vertical-spacing'>
 
       <div>
@@ -167,7 +178,7 @@ Radius                </Button>
 <ProgressBar completed={60} />
       </div>
     </div>
-              </Row>
+              </Row> */}
         </div>
       </CardBody>
        

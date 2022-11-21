@@ -25,6 +25,12 @@ const Addcampaign = () => {
   // ** States
   const [activeTab, setActiveTab] = useState(1)
   const [data, setData] = useState(null)
+  const [s_date, sets_date] = useState()
+  const [e_date, sete_date] = useState()
+  const [budget, setbudget] = useState()
+  const [locations, setlocations] = useState()
+  const [radius, setradius] = useState()
+  const [stepdata, setstepdata] = useState()
   const steps = getSteps()
 
   // const toggleTab = tab => {
@@ -39,7 +45,7 @@ const Addcampaign = () => {
   useEffect(() => {
     axios.get('/account-setting/data').then(response => setData(response.data))
   }, [])
-
+console.log(stepdata)
   return (
     <Fragment>
         <Row className='mb-2 mt-2'>   
@@ -69,18 +75,32 @@ const Addcampaign = () => {
               </TabPane>
               <TabPane tabId={2}>
                 <Step2 
+                   setstepdata = {setstepdata}
+                   stepdata = {stepdata}
                    handleNext={handleNext}
                    handlePre={handlePre}
                 />
               </TabPane>
               <TabPane tabId={3}>
                 <Step3 
-                   handleNext={handleNext}
-                   handlePre={handlePre}
-                />
+                   handleNext= {handleNext}
+                   handlePre=  {handlePre}
+                   sets_date = {sets_date}
+                   sete_date = {sete_date}
+                   setbudget = {setbudget}
+                   setlocations = {setlocations}
+                   setradius = {setradius}
+                   stepdata = {stepdata}
+               />
               </TabPane>
               <TabPane tabId={4}>
                 <Step4 
+                s_date = {s_date}
+                e_date = {e_date}
+                budget = {budget}
+                locations = {locations}
+                radius = {radius}
+                stepdata = {stepdata}
                    handleNext={handleNext}
                    handlePre={handlePre}
                 />
